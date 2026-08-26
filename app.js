@@ -717,15 +717,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         const card = document.createElement('div');
-        card.className = "p-4 rounded-2xl bg-white/5 border border-accent/30 shadow-lg shadow-accent/5 flex items-start gap-4";
+        card.className = "p-4 rounded-2xl bg-card border border-emerald-400/40 shadow-lg shadow-emerald-500/5 flex items-start gap-3.5";
         card.innerHTML = `
-            <div class="w-10 h-10 rounded-full bg-accent/20 text-accent font-bold text-sm flex items-center justify-center flex-shrink-0">${initial}</div>
+            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-dark font-black text-sm flex items-center justify-center flex-shrink-0 shadow-md">${initial}</div>
             <div class="flex-1">
                 <div class="flex items-center justify-between mb-1">
-                    <span class="text-xs font-bold text-white">${rev.author} <span class="text-[10px] text-accent font-mono ml-1">à l'instant</span></span>
+                    <span class="text-xs font-bold text-white">${rev.author} <span class="text-[10px] text-emerald-400 font-mono ml-1">à l'instant</span></span>
                     <div class="text-yellow-400 text-[11px]">${starsHtml}</div>
                 </div>
-                <div class="inline-block text-[10px] px-2 py-0.5 rounded bg-accent/10 text-accent font-mono mb-2">${rev.tag}</div>
+                <div class="inline-block text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 font-mono mb-1.5 border border-emerald-500/20">${rev.tag}</div>
                 ${rev.comment ? `<p class="text-xs text-gray-300 leading-relaxed">"${rev.comment}"</p>` : ''}
             </div>
         `;
