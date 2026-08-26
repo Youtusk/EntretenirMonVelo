@@ -72,32 +72,32 @@
         </div>
 
         <!-- Mobile Drawer -->
-        <div id="mobile-menu" class="md:hidden space-y-2">
-            <a href="#simulateur" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+        <div id="mobile-menu" class="hidden md:hidden space-y-2" style="display: none;">
+            <a href="#simulateur" onclick="closeMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
                 <span>🧮 Simulateur d'économies</span>
                 <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
             </a>
-            <a href="#diagnostic" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+            <a href="#diagnostic" onclick="closeMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
                 <span>🩺 Diagnostic panne express</span>
                 <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
             </a>
-            <a href="#types-freins" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+            <a href="#types-freins" onclick="closeMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
                 <span>🛑 Comprendre ses freins (3 types)</span>
                 <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
             </a>
-            <a href="#guides" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+            <a href="#guides" onclick="closeMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
                 <span>📖 Guides pratiques pas-à-pas</span>
                 <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
             </a>
-            <a href="#outils" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+            <a href="#outils" onclick="closeMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
                 <span>🧰 La boîte à outils à 25€</span>
                 <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
             </a>
-            <a href="#checklist" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+            <a href="#checklist" onclick="closeMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
                 <span>✅ Checklist d'entretien</span>
                 <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
             </a>
-            <a href="#avis" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-accent hover:text-emerald-300 py-3 px-2 flex items-center justify-between">
+            <a href="#avis" onclick="closeMobileMenu()" class="block text-sm font-semibold text-accent hover:text-emerald-300 py-3 px-2 flex items-center justify-between">
                 <span>⭐️ Donner son avis sur le site</span>
                 <i class="fa-solid fa-arrow-right text-xs text-accent"></i>
             </a>
@@ -110,15 +110,27 @@
             var menu = document.getElementById('mobile-menu');
             var icon = document.getElementById('burger-icon');
             if (menu) {
-                menu.classList.toggle('show-menu');
-                if (icon) {
-                    if (menu.classList.contains('show-menu')) {
-                        icon.className = 'fa-solid fa-xmark';
-                    } else {
-                        icon.className = 'fa-solid fa-bars';
-                    }
+                var isOpen = menu.classList.contains('show-menu') || menu.style.display === 'block';
+                if (isOpen) {
+                    menu.classList.remove('show-menu');
+                    menu.style.display = 'none';
+                    if (icon) icon.className = 'fa-solid fa-bars';
+                } else {
+                    menu.classList.add('show-menu');
+                    menu.style.display = 'block';
+                    if (icon) icon.className = 'fa-solid fa-xmark';
                 }
             }
+        }
+
+        function closeMobileMenu() {
+            var menu = document.getElementById('mobile-menu');
+            var icon = document.getElementById('burger-icon');
+            if (menu) {
+                menu.classList.remove('show-menu');
+                menu.style.display = 'none';
+            }
+            if (icon) icon.className = 'fa-solid fa-bars';
         }
     </script>
 
