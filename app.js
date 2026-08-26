@@ -834,6 +834,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             renderReviewCard(newReview, true);
+            updateReviewsStats();
             lastReviewTime = now;
 
             reviewFeedback.className = "text-center text-xs font-semibold py-2.5 px-4 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
@@ -843,6 +844,27 @@ document.addEventListener('DOMContentLoaded', () => {
             reviewForm.reset();
             updateStars(5);
         });
+    }
+
+    function updateReviewsStats() {
+        const scoreEl = document.getElementById('avg-score-display');
+        const countEl = document.getElementById('reviews-count-display');
+        if (!scoreEl || !countEl) return;
+
+        let userReviews = [];
+        try {
+            userReviews = JSON.parse(localStorage.getItem(REVIEWS_STORAGE_KEY)) || [];
+        } catch(e) {}
+
+        if (userReviews.length === 0) {
+            scoreEl.innerHTML = `5.0<span class="text-lg text-gray-400">/5</span>`;
+            countEl.textContent = "Sois le premier à laisser ton avis !";
+        } else {
+            const sum = userReviews.reduce((acc, r) => acc + (r.rating || 5), 0);
+            const avg = (sum / userReviews.length).toFixed(1);
+            scoreEl.innerHTML = `${avg}<span class="text-lg text-gray-400">/5</span>`;
+            countEl.textContent = `Basé sur ${userReviews.length} avis vérifié${userReviews.length > 1 ? 's' : ''}`;
+        }
     }
 
     loadUserReviews();
