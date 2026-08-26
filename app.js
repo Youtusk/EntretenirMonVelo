@@ -849,6 +849,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateReviewsStats() {
         const scoreEl = document.getElementById('avg-score-display');
         const countEl = document.getElementById('reviews-count-display');
+        const starsEl = document.getElementById('avg-stars-display');
         if (!scoreEl || !countEl) return;
 
         let userReviews = [];
@@ -858,12 +859,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (userReviews.length === 0) {
             scoreEl.innerHTML = `5.0<span class="text-lg text-gray-400">/5</span>`;
-            countEl.textContent = "Sois le premier à laisser ton avis !";
+            countEl.textContent = "Sois le premier à donner ton avis";
+            if (starsEl) starsEl.innerHTML = '<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>';
         } else {
-            const sum = userReviews.reduce((acc, r) => acc + (r.rating || 5), 0);
+            const sum = userReviews.reduce((acc, r) => acc + (parseFloat(r.rating) || 5), 0);
             const avg = (sum / userReviews.length).toFixed(1);
             scoreEl.innerHTML = `${avg}<span class="text-lg text-gray-400">/5</span>`;
             countEl.textContent = `Basé sur ${userReviews.length} avis vérifié${userReviews.length > 1 ? 's' : ''}`;
+            
+            if (starsEl) {
+                const rounded = Math.round(parseFloat(avg));
+                let starsHtml = '';
+                for (let j = 0; j < 5; j++) {
+                    if (j < rounded) {
+                        starsHtml += '<i class="fa-solid fa-star"></i>';
+                    } else {
+                        starsHtml += '<i class="fa-regular fa-star text-gray-600"></i>';
+                    }
+                }
+                starsEl.innerHTML = starsHtml;
+            }
         }
     }
 

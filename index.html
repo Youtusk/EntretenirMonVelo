@@ -1018,6 +1018,49 @@
             </div>
         </section>
 
+        <script>
+            // Live Stats Calculation for Reviews
+            function refreshReviewsStats() {
+                var scoreEl = document.getElementById('avg-score-display');
+                var countEl = document.getElementById('reviews-count-display');
+                var starsEl = document.getElementById('avg-stars-display');
+                if (!scoreEl || !countEl) return;
+
+                var userReviews = [];
+                try {
+                    userReviews = JSON.parse(localStorage.getItem('entretenirmonvelo_reviews_v2')) || [];
+                } catch(e) {}
+
+                if (userReviews.length === 0) {
+                    scoreEl.innerHTML = '5.0<span class="text-lg text-gray-400">/5</span>';
+                    countEl.textContent = 'Sois le premier à donner ton avis';
+                    if (starsEl) starsEl.innerHTML = '<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>';
+                } else {
+                    var sum = 0;
+                    for (var i = 0; i < userReviews.length; i++) {
+                        sum += (parseFloat(userReviews[i].rating) || 5);
+                    }
+                    var avg = (sum / userReviews.length).toFixed(1);
+                    scoreEl.innerHTML = avg + '<span class="text-lg text-gray-400">/5</span>';
+                    countEl.textContent = 'Basé sur ' + userReviews.length + ' avis vérifié' + (userReviews.length > 1 ? 's' : '');
+                    
+                    if (starsEl) {
+                        var rounded = Math.round(parseFloat(avg));
+                        var starsHtml = '';
+                        for (var j = 0; j < 5; j++) {
+                            if (j < rounded) {
+                                starsHtml += '<i class="fa-solid fa-star"></i>';
+                            } else {
+                                starsHtml += '<i class="fa-regular fa-star text-gray-600"></i>';
+                            }
+                        }
+                        starsEl.innerHTML = starsHtml;
+                    }
+                }
+            }
+            document.addEventListener('DOMContentLoaded', refreshReviewsStats);
+        </script>
+
         <!-- Contact / Question Form -->
         <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 relative max-w-4xl mx-auto scroll-mt-24">
             <div class="rounded-3xl p-8 sm:p-12 bg-gradient-to-b from-card to-card/70 border border-accent/30 shadow-2xl relative overflow-hidden text-center">
