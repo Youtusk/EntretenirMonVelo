@@ -643,7 +643,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewForm = document.getElementById('review-form');
     const reviewsContainer = document.getElementById('reviews-container');
     const reviewFeedback = document.getElementById('review-feedback');
-    const REVIEWS_STORAGE_KEY = 'entretenirmonvelo_user_reviews';
+    const REVIEWS_STORAGE_KEY = 'entretenirmonvelo_reviews_v2';
 
     let selectedRating = 5;
     let selectedTag = "🔥 Tuto hyper clair";
