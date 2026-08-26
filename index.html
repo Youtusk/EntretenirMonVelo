@@ -65,36 +65,61 @@
                     <span>Calculer mes économies</span>
                     <i class="fa-solid fa-arrow-right text-xs"></i>
                 </a>
-                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white p-2 text-xl" aria-label="Menu Mobile">
-                    <i class="fa-solid fa-bars"></i>
+                <button id="mobile-menu-btn" type="button" class="md:hidden text-gray-300 hover:text-white p-2.5 text-2xl focus:outline-none cursor-pointer rounded-xl bg-white/5 border border-white/10" aria-label="Menu Mobile" onclick="toggleMobileMenu(event)">
+                    <i class="fa-solid fa-bars" id="burger-icon"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Drawer -->
-        <div id="mobile-menu" class="md:hidden hidden bg-card/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 space-y-4">
-            <a href="#simulateur" class="block text-base font-semibold text-gray-200 hover:text-accent py-2 border-b border-white/5">Simulateur d'économies</a>
-            <a href="#diagnostic" class="block text-base font-semibold text-gray-200 hover:text-accent py-2 border-b border-white/5">Diagnostic panne express</a>
-            <a href="#types-freins" class="block text-base font-semibold text-gray-200 hover:text-accent py-2 border-b border-white/5">Comprendre ses freins (3 types)</a>
-            <a href="#guides" class="block text-base font-semibold text-gray-200 hover:text-accent py-2 border-b border-white/5">Guides pratiques pas-à-pas</a>
-            <a href="#outils" class="block text-base font-semibold text-gray-200 hover:text-accent py-2 border-b border-white/5">La boîte à outils à 25€</a>
-            <a href="#checklist" class="block text-base font-semibold text-gray-200 hover:text-accent py-2 border-b border-white/5">Checklist d'entretien</a>
-            <a href="#avis" class="block text-base font-semibold text-accent py-2">Donner son avis sur le site</a>
+        <div id="mobile-menu" class="md:hidden space-y-2">
+            <a href="#simulateur" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+                <span>🧮 Simulateur d'économies</span>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+            </a>
+            <a href="#diagnostic" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+                <span>🩺 Diagnostic panne express</span>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+            </a>
+            <a href="#types-freins" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+                <span>🛑 Comprendre ses freins (3 types)</span>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+            </a>
+            <a href="#guides" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+                <span>📖 Guides pratiques pas-à-pas</span>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+            </a>
+            <a href="#outils" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+                <span>🧰 La boîte à outils à 25€</span>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+            </a>
+            <a href="#checklist" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-gray-200 hover:text-accent py-3 px-2 border-b border-white/5 flex items-center justify-between">
+                <span>✅ Checklist d'entretien</span>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+            </a>
+            <a href="#avis" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-accent hover:text-emerald-300 py-3 px-2 flex items-center justify-between">
+                <span>⭐️ Donner son avis sur le site</span>
+                <i class="fa-solid fa-arrow-right text-xs text-accent"></i>
+            </a>
         </div>
     </header>
 
     <script>
-        // Instant Mobile Menu Toggle
-        document.addEventListener('DOMContentLoaded', () => {
-            const mBtn = document.getElementById('mobile-menu-btn');
-            const mMenu = document.getElementById('mobile-menu');
-            if (mBtn && mMenu) {
-                mBtn.onclick = function(e) {
-                    e.preventDefault();
-                    mMenu.classList.toggle('hidden');
-                };
+        function toggleMobileMenu(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            var menu = document.getElementById('mobile-menu');
+            var icon = document.getElementById('burger-icon');
+            if (menu) {
+                menu.classList.toggle('show-menu');
+                if (icon) {
+                    if (menu.classList.contains('show-menu')) {
+                        icon.className = 'fa-solid fa-xmark';
+                    } else {
+                        icon.className = 'fa-solid fa-bars';
+                    }
+                }
             }
-        });
+        }
     </script>
 
     <main class="relative z-10 pt-28">

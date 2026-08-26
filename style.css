@@ -91,6 +91,26 @@ body {
     -webkit-backdrop-filter: blur(24px);
 }
 
+/* Mobile Menu Drawer */
+#mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(18, 26, 43, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+}
+
+#mobile-menu.show-menu {
+    display: block !important;
+}
+
 /* Modal Styling & Scroll Safety */
 #guide-modal {
     position: fixed;
