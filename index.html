@@ -291,105 +291,122 @@
         </section>
 
         <!-- Interactive Simulator Section -->
-        <section id="simulateur" class="py-20 px-4 sm:px-6 lg:px-8 relative max-w-7xl mx-auto scroll-mt-24">
-            <div class="rounded-3xl p-8 sm:p-12 bg-gradient-to-b from-card to-card/60 border border-accent/20 shadow-2xl relative overflow-hidden">
-                <div class="absolute -top-32 -right-32 w-80 h-80 bg-accent/15 rounded-full blur-[100px] pointer-events-none"></div>
+        <section id="simulateur" class="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative max-w-7xl mx-auto scroll-mt-24">
+            <div class="rounded-3xl p-6 sm:p-12 bg-gradient-to-b from-card to-card/70 border border-emerald-500/30 shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-32 -right-32 w-80 h-80 bg-emerald-500/20 rounded-full blur-[100px] pointer-events-none"></div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                     <!-- Left: Controls -->
-                    <div class="lg:col-span-7 space-y-8">
+                    <div class="lg:col-span-7 space-y-6 sm:space-y-8">
                         <div>
-                            <span class="text-xs font-mono uppercase text-accent font-bold px-3 py-1 rounded-full bg-accent/10 border border-accent/20">Calculateur Interactif</span>
-                            <h2 class="text-3xl sm:text-4xl font-display font-bold text-white mt-3 mb-2">Combien tu laisses sur la table ?</h2>
-                            <p class="text-gray-400 text-sm sm:text-base">Ajuste tes habitudes pour estimer ce que tu économises en réparant toi-même chaque année.</p>
+                            <span class="inline-block text-xs font-mono uppercase text-emerald-300 font-bold px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 shadow-sm shadow-emerald-500/20">⚡ Calculateur Anti-Pigeon</span>
+                            <h2 class="text-2xl sm:text-4xl font-display font-bold text-white mt-3 mb-2">Combien tu laisses sur la table ?</h2>
+                            <p class="text-gray-300 text-xs sm:text-base">Choisis ton vélo et ajuste les curseurs pour voir tes économies immédiates.</p>
                         </div>
 
                         <!-- Bike Type -->
                         <div class="space-y-3">
-                            <label class="text-xs font-mono uppercase tracking-wider text-gray-300 font-bold block">1. Ton type de vélo</label>
+                            <label class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold block">1. Ton type de vélo :</label>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="bike-types">
-                                <button type="button" data-multiplier="1.0" class="bike-type-btn active p-3 rounded-xl bg-white/5 border border-accent text-white text-xs font-semibold flex flex-col items-center gap-2 hover:bg-white/10 transition-all">
-                                    <i class="fa-solid fa-bicycle text-lg text-accent"></i>
-                                    <span>Vélo de Ville / VTC</span>
+                                <button type="button" data-multiplier="1.0" class="bike-type-btn active p-3.5 rounded-2xl bg-white/5 border border-emerald-400 text-white text-xs font-bold flex flex-col items-center gap-2 transition-all">
+                                    <i class="fa-solid fa-bicycle text-2xl text-emerald-400"></i>
+                                    <span>Ville / VTC</span>
                                 </button>
-                                <button type="button" data-multiplier="1.2" class="bike-type-btn p-3 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-xs font-semibold flex flex-col items-center gap-2 hover:bg-white/10 transition-all">
-                                    <i class="fa-solid fa-person-biking text-lg text-emerald-400"></i>
+                                <button type="button" data-multiplier="1.2" class="bike-type-btn p-3.5 rounded-2xl bg-white/5 border border-white/10 text-gray-300 text-xs font-bold flex flex-col items-center gap-2 transition-all">
+                                    <i class="fa-solid fa-person-biking text-2xl text-teal-400"></i>
                                     <span>VTT / Gravel</span>
                                 </button>
-                                <button type="button" data-multiplier="1.3" class="bike-type-btn p-3 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-xs font-semibold flex flex-col items-center gap-2 hover:bg-white/10 transition-all">
-                                    <i class="fa-solid fa-road text-lg text-teal-400"></i>
-                                    <span>Vélo de Route</span>
+                                <button type="button" data-multiplier="1.3" class="bike-type-btn p-3.5 rounded-2xl bg-white/5 border border-white/10 text-gray-300 text-xs font-bold flex flex-col items-center gap-2 transition-all">
+                                    <i class="fa-solid fa-road text-2xl text-cyan-400"></i>
+                                    <span>Route</span>
                                 </button>
-                                <button type="button" data-multiplier="1.6" class="bike-type-btn p-3 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-xs font-semibold flex flex-col items-center gap-2 hover:bg-white/10 transition-all">
-                                    <i class="fa-solid fa-bolt text-lg text-yellow-400"></i>
-                                    <span>Vélo Électrique (VAE)</span>
+                                <button type="button" data-multiplier="1.6" class="bike-type-btn p-3.5 rounded-2xl bg-white/5 border border-white/10 text-gray-300 text-xs font-bold flex flex-col items-center gap-2 transition-all">
+                                    <i class="fa-solid fa-bolt text-2xl text-yellow-400"></i>
+                                    <span>Électrique (VAE)</span>
                                 </button>
                             </div>
                         </div>
 
                         <!-- Sliders -->
-                        <div class="space-y-6">
+                        <div class="space-y-5">
+                            <label class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold block">2. Tes réparations estimées / an :</label>
+                            
                             <!-- Crevaisons Slider -->
-                            <div>
-                                <div class="flex justify-between items-center text-sm mb-2">
-                                    <span class="text-gray-300 font-medium"><i class="fa-solid fa-circle-dot text-accent mr-2"></i> Crevaisons estimées / an :</span>
-                                    <span class="font-mono font-bold text-accent text-base" id="val-crevaisons">2</span>
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                                <div class="flex justify-between items-center text-xs sm:text-sm">
+                                    <span class="text-white font-semibold flex items-center gap-2">
+                                        <i class="fa-solid fa-circle-dot text-emerald-400 text-base"></i>
+                                        <span>Crevaisons par an</span>
+                                    </span>
+                                    <span class="font-mono font-bold px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-xs sm:text-sm whitespace-nowrap">
+                                        <span id="val-crevaisons">2</span> fois / an
+                                    </span>
                                 </div>
-                                <input type="range" id="slider-crevaisons" min="0" max="6" value="2" class="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-accent">
+                                <input type="range" id="slider-crevaisons" min="0" max="6" value="2" class="w-full">
                             </div>
 
-                            <!-- Révisions / Réglages Slider -->
-                            <div>
-                                <div class="flex justify-between items-center text-sm mb-2">
-                                    <span class="text-gray-300 font-medium"><i class="fa-solid fa-sliders text-emerald-400 mr-2"></i> Réglages vitesses & freins / an :</span>
-                                    <span class="font-mono font-bold text-emerald-400 text-base" id="val-reglages">2</span>
+                            <!-- Réglages Slider -->
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                                <div class="flex justify-between items-center text-xs sm:text-sm">
+                                    <span class="text-white font-semibold flex items-center gap-2">
+                                        <i class="fa-solid fa-sliders text-teal-400 text-base"></i>
+                                        <span>Réglages vitesses &amp; freins</span>
+                                    </span>
+                                    <span class="font-mono font-bold px-3 py-1 rounded-xl bg-teal-500/20 text-teal-300 border border-teal-400/40 text-xs sm:text-sm whitespace-nowrap">
+                                        <span id="val-reglages">2</span> fois / an
+                                    </span>
                                 </div>
-                                <input type="range" id="slider-reglages" min="0" max="5" value="2" class="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-emerald-400">
+                                <input type="range" id="slider-reglages" min="0" max="5" value="2" class="w-full">
                             </div>
 
-                            <!-- Changement pièces d'usure (plaquettes, chaîne) -->
-                            <div>
-                                <div class="flex justify-between items-center text-sm mb-2">
-                                    <span class="text-gray-300 font-medium"><i class="fa-solid fa-link text-yellow-400 mr-2"></i> Changement chaîne / plaquettes / an :</span>
-                                    <span class="font-mono font-bold text-yellow-400 text-base" id="val-pieces">1</span>
+                            <!-- Changement pièces Slider -->
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                                <div class="flex justify-between items-center text-xs sm:text-sm">
+                                    <span class="text-white font-semibold flex items-center gap-2">
+                                        <i class="fa-solid fa-link text-yellow-400 text-base"></i>
+                                        <span>Changement pièces d'usure</span>
+                                    </span>
+                                    <span class="font-mono font-bold px-3 py-1 rounded-xl bg-yellow-500/20 text-yellow-300 border border-yellow-400/40 text-xs sm:text-sm whitespace-nowrap">
+                                        <span id="val-pieces">1</span> fois / an
+                                    </span>
                                 </div>
-                                <input type="range" id="slider-pieces" min="0" max="4" value="1" class="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-yellow-400">
+                                <input type="range" id="slider-pieces" min="0" max="4" value="1" class="w-full">
                             </div>
                         </div>
                     </div>
 
                     <!-- Right: Results Card -->
                     <div class="lg:col-span-5">
-                        <div class="p-8 rounded-3xl bg-black/60 border border-accent/40 shadow-2xl relative flex flex-col justify-between min-h-[380px]">
+                        <div class="p-6 sm:p-8 rounded-3xl bg-black/80 border-2 border-emerald-400/60 shadow-2xl relative flex flex-col justify-between min-h-[360px]">
                             <div>
-                                <div class="flex items-center justify-between mb-6">
-                                    <span class="text-xs font-mono text-gray-400 uppercase tracking-widest">Bilan Annuel</span>
-                                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-accent/20 text-accent font-mono">100% DIY</span>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-xs font-mono text-gray-300 uppercase tracking-wider font-bold">BILAN ANNUEL</span>
+                                    <span class="text-xs font-black px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-400/30">100% DIY</span>
                                 </div>
 
                                 <div class="text-xs text-gray-400 mb-1 font-medium">Facture Atelier Évitée :</div>
-                                <div class="text-4xl sm:text-5xl font-mono font-extrabold text-white mb-6 tracking-tight flex items-baseline gap-2">
-                                    <span id="result-atelier">220</span><span class="text-2xl text-red-400">€/an</span>
+                                <div class="text-3xl sm:text-5xl font-mono font-extrabold text-white mb-5 tracking-tight flex items-baseline gap-2">
+                                    <span id="result-atelier">220</span><span class="text-xl sm:text-2xl text-red-400 font-sans font-bold">€ / an</span>
                                 </div>
 
-                                <div class="space-y-4 pt-4 border-t border-white/10">
-                                    <div class="flex justify-between items-center text-sm">
-                                        <span class="text-gray-400">Coût réel des pièces DIY :</span>
-                                        <span class="font-mono font-semibold text-gray-300" id="result-diy">28€</span>
+                                <div class="space-y-3 pt-3 border-t border-white/10">
+                                    <div class="flex justify-between items-center text-xs sm:text-sm">
+                                        <span class="text-gray-300">Coût réel des pièces DIY :</span>
+                                        <span class="font-mono font-bold text-white text-sm sm:text-base" id="result-diy">28€</span>
                                     </div>
-                                    <div class="flex justify-between items-center text-sm">
-                                        <span class="text-gray-400">Temps total nécessaire :</span>
-                                        <span class="font-mono font-semibold text-gray-300" id="result-temps">~45 min / an</span>
+                                    <div class="flex justify-between items-center text-xs sm:text-sm">
+                                        <span class="text-gray-300">Temps total nécessaire :</span>
+                                        <span class="font-mono font-bold text-emerald-300 text-sm sm:text-base" id="result-temps">~45 min / an</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="mt-8 pt-6 border-t border-white/10">
-                                <div class="text-xs text-gray-400 uppercase font-mono mb-1">Argent propre économisé :</div>
-                                <div class="text-3xl sm:text-4xl font-mono font-black text-accent flex items-baseline gap-2">
-                                    +<span id="result-economie">192</span>€ <span class="text-sm font-sans font-semibold text-gray-300">dans ta poche</span>
+                            <div class="mt-6 pt-5 border-t border-white/10">
+                                <div class="text-xs text-gray-300 uppercase font-mono font-bold mb-1">Argent propre économisé :</div>
+                                <div class="text-3xl sm:text-4xl font-mono font-black text-emerald-400 flex items-baseline gap-2">
+                                    +<span id="result-economie">192</span>€ <span class="text-xs sm:text-sm font-sans font-semibold text-gray-200">dans ta poche</span>
                                 </div>
-                                <a href="#guides" class="mt-6 w-full py-3.5 px-4 rounded-xl bg-accent text-dark font-bold text-center text-sm flex items-center justify-center gap-2 hover:bg-emerald-300 transition-colors">
+                                <a href="#guides" class="mt-5 w-full py-3.5 px-4 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-dark font-black text-center text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 transition-all">
                                     <span>Apprendre ces réparations maintenant</span>
                                     <i class="fa-solid fa-arrow-down text-xs"></i>
                                 </a>
