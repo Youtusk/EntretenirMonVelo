@@ -716,13 +716,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
+        const platformText = rev.platform || "via TikTok";
         const card = document.createElement('div');
         card.className = "p-4 rounded-2xl bg-card border border-emerald-400/40 shadow-lg shadow-emerald-500/5 flex items-start gap-3.5";
         card.innerHTML = `
             <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-dark font-black text-sm flex items-center justify-center flex-shrink-0 shadow-md">${initial}</div>
             <div class="flex-1">
                 <div class="flex items-center justify-between mb-1">
-                    <span class="text-xs font-bold text-white">${rev.author} <span class="text-[10px] text-emerald-400 font-mono ml-1">à l'instant</span></span>
+                    <span class="text-xs font-bold text-white">${rev.author} <span class="text-[10px] text-emerald-400 font-mono ml-1">${platformText}</span></span>
                     <div class="text-yellow-400 text-[11px]">${starsHtml}</div>
                 </div>
                 <div class="inline-block text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 font-mono mb-1.5 border border-emerald-500/20">${rev.tag}</div>
@@ -737,19 +738,85 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Security & Anti-Spam Helpers
+    const FORBIDDEN_WORDS = [
+        'fdp', 'connard', 'conne', 'salope', 'pute', 'merde', 'encule', 'enculé', 
+        'batard', 'bâtard', 'bite', 'chatte', 'nique', 'ntm', 'tg', 'nazi', 
+        'hitler', 'suce', 'raciste', 'viol', 'foutre', 'porn', 'sexe', 'arnaque'
+    ];
+
+    function sanitizeText(str) {
+        if (!str) return '';
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    function containsBadWords(str) {
+        if (!str) return false;
+        const normalized = str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return FORBIDDEN_WORDS.some(word => {
+            const regex = new RegExp(`\\b${word}\\b|${word}`, 'i');
+            return regex.test(normalized);
+        });
+    }
+
+    let lastReviewTime = 0;
+
     if (reviewForm) {
         reviewForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const author = document.getElementById('review-author').value.trim();
-            const comment = document.getElementById('review-comment').value.trim();
+            const rawAuthor = document.getElementById('review-author').value.trim();
+            const rawComment = document.getElementById('review-comment').value.trim();
+            const platformSelect = document.getElementById('review-platform');
+            const platform = platformSelect ? platformSelect.value : "via TikTok";
 
-            if (!author) return;
+            if (!reviewFeedback) return;
+
+            // Anti-spam cooldown (10s)
+            const now = Date.now();
+            if (now - lastReviewTime < 10000) {
+                reviewFeedback.className = "text-center text-xs font-semibold py-2.5 px-4 rounded-xl bg-yellow-500/20 text-yellow-300 border border-yellow-500/30";
+                reviewFeedback.textContent = "⏳ Merci de patienter quelques secondes avant de reposter un avis.";
+                reviewFeedback.classList.remove('hidden');
+                return;
+            }
+
+            // Pseudo validation
+            if (!rawAuthor || rawAuthor.length < 2) {
+                reviewFeedback.className = "text-center text-xs font-semibold py-2.5 px-4 rounded-xl bg-red-500/20 text-red-300 border border-red-500/30";
+                reviewFeedback.textContent = "⚠️ Merci d'indiquer un prénom ou pseudo valide (minimum 2 caractères).";
+                reviewFeedback.classList.remove('hidden');
+                return;
+            }
+
+            if (rawAuthor.length > 30) {
+                reviewFeedback.className = "text-center text-xs font-semibold py-2.5 px-4 rounded-xl bg-red-500/20 text-red-300 border border-red-500/30";
+                reviewFeedback.textContent = "⚠️ Ton prénom/pseudo est trop long (max 30 caractères).";
+                reviewFeedback.classList.remove('hidden');
+                return;
+            }
+
+            // Moderation & Profanity Filter
+            if (containsBadWords(rawAuthor) || containsBadWords(rawComment)) {
+                reviewFeedback.className = "text-center text-xs font-semibold py-2.5 px-4 rounded-xl bg-red-500/20 text-red-300 border border-red-500/30";
+                reviewFeedback.textContent = "🚫 Ton message contient des termes inappropriés. Merci de rester respectueux.";
+                reviewFeedback.classList.remove('hidden');
+                return;
+            }
+
+            const cleanAuthor = sanitizeText(rawAuthor);
+            const cleanComment = sanitizeText(rawComment);
 
             const newReview = {
-                author: author,
+                author: cleanAuthor,
+                platform: platform,
                 rating: selectedRating,
                 tag: selectedTag,
-                comment: comment,
+                comment: cleanComment,
                 date: new Date().toISOString()
             };
 
@@ -763,11 +830,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             renderReviewCard(newReview, true);
+            lastReviewTime = now;
 
-            if (reviewFeedback) {
-                reviewFeedback.textContent = "Merci pour ton avis ! Il a été publié en direct sur la page.";
-                reviewFeedback.classList.remove('hidden');
-            }
+            reviewFeedback.className = "text-center text-xs font-semibold py-2.5 px-4 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+            reviewFeedback.textContent = "✅ Merci " + cleanAuthor + " ! Ton avis " + platform + " a été validé et publié en direct.";
+            reviewFeedback.classList.remove('hidden');
 
             reviewForm.reset();
             updateStars(5);
