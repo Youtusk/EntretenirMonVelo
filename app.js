@@ -706,6 +706,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderReviewCard(rev, prepend = true) {
         if (!reviewsContainer) return;
+
+        const emptyNotice = document.getElementById('empty-reviews-notice');
+        if (emptyNotice) emptyNotice.remove();
+
         const initial = (rev.author || "A").charAt(0).toUpperCase();
         let starsHtml = '';
         for (let i = 0; i < 5; i++) {
@@ -718,7 +722,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const platformText = rev.platform || "via TikTok";
         const card = document.createElement('div');
-        card.className = "p-4 rounded-2xl bg-card border border-emerald-400/40 shadow-lg shadow-emerald-500/5 flex items-start gap-3.5";
+        card.className = "p-4 rounded-2xl bg-card border border-emerald-400/40 shadow-lg shadow-emerald-500/5 flex items-start gap-3.5 animate-fade-in";
         card.innerHTML = `
             <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-dark font-black text-sm flex items-center justify-center flex-shrink-0 shadow-md">${initial}</div>
             <div class="flex-1">
